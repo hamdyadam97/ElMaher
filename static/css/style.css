@@ -1883,7 +1883,7 @@ body.dark .header.header-fixed .logo a img.logo-dark {
 
 .projectmanager {
     color: #fff;
-    background-image: url("http://via.placeholder.com/1600x650");
+    background-image: url("../img/blog/23.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -1893,7 +1893,10 @@ body.dark .header.header-fixed .logo a img.logo-dark {
     padding: 120px 0 100px;
 }
 .projectmanagerpicture {
+    width: 350px; /* العرض */
+    height: 350px; /* الطول */
     border-radius: 50%;
+    object-fit: cover; /* يخلي الصورة تتظبط وتتقص حسب الإطار */
 }
 .projectmanager h1 {
     margin-bottom: 20px;
@@ -2071,6 +2074,13 @@ body.dark .header.header-fixed .logo a img.logo-dark {
     position: relative;
     margin-left: 4px;
 }
+.team-pic{
+     width: 150px; /* العرض */
+     height: 150px; /* الطول */
+     border-radius: 50%;
+     object-fit: cover;
+
+    }
 /* Testimonials
 ---------------------------------------- */
 
@@ -3784,6 +3794,13 @@ body.dark.blog-page .banner-blog-post .meta {
         margin: 0 auto;
         display: block;
         margin-bottom: 25px;
+    }
+    .team-pic{
+     width: 50px; /* العرض */
+     height: 50px; /* الطول */
+     border-radius: 50%;
+     object-fit: cover;
+
     }
     .newsletter .custom-form-group {
         padding: 0;

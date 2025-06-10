@@ -3921,3 +3921,42 @@ body.skew .portfolio .container  {
     padding: 0 15px;
 }
 }
+
+
+.whatsapp-fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+
+.whatsapp-fixed.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.call-button {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 50%;
+    padding: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    z-index: 9999;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .call-button:hover {
+    background-color: #218838;
+  }
+
+  .call-button svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+  }
+

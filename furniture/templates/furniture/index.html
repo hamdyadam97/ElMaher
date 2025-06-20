@@ -131,6 +131,30 @@
               id="navbarSupportedContent"
             >
               <ul class="nav-menu-inner mr-auto">
+                {% if user.is_authenticated and is_frontend_user %}
+  <li>
+    <a class="link-menu" href="{% url 'furniture:logout' %}">
+      <i class="fa fa-sign-out"></i> تسجيل الخروج
+    </a>
+  </li>
+  <li>
+    <span class="link-menu">
+      <i class="fa fa-user-circle"></i> مرحبًا {{ user.username }}
+    </span>
+  </li>
+{% else %}
+ <li>
+ <a class="link-menu" href="{% url 'furniture:login' %}">
+    <i class="fa fa-sign-in"></i> تسجيل الدخول
+  </a>
+</li>
+
+  <li>
+    <a class="link-menu" href="{% url 'furniture:signup' %}">
+      <i class="fa fa-user-plus"></i> إنشاء حساب
+    </a>
+  </li>
+{% endif %}
                 <li>
                   <a
                     data-toggle="collapse"
@@ -2408,5 +2432,6 @@
   });
 </script>
     <!-- Revolution Slider Initialization Ends -->
+  <!-- Login Modal -->
   </body>
 </html>

@@ -131,7 +131,7 @@
               <ul class="nav-menu-inner mr-auto">
                 <li>
                   <a class="link-menu nav-external" href="index-rtl.html"
-                    ><i class="fa fa-arrow-left"></i> الصفحة الرئيسية</a
+                    ><i class="fa fa-arrow-left"></i> شركة  الاوئل</a
                   >
                 </li>
               </ul>
@@ -147,7 +147,7 @@
           <div class="text-center top-text">
             <!-- Main Heading Starts -->
             <div class="text-center top-text">
-              <h1>مدوّنة سليمو</h1>
+              <h1>شركة الاوئل</h1>
             </div>
             <!-- Main Heading Ends -->
             <hr />
@@ -240,7 +240,7 @@
 {% endfor %}
 
                 </div>
-               {% if user.is_authenticated %}
+               {% if user.is_authenticated and is_frontend_user %}
     <form method="POST" class="mt-2">
       {% csrf_token %}
       {{ form.as_p }}
@@ -248,7 +248,7 @@
       <button type="submit" class="btn btn-sm btn-primary">إرسال</button>
     </form>
   {% else %}
-    <p><a href="{% url 'login' %}">سجّل الدخول</a> لإضافة تعليق.</p>
+    <p><a href="{% url 'furniture:login' %}">سجّل الدخول</a> لإضافة تعليق.</p>
   {% endif %}
               </article>
               {% endfor %}
@@ -307,17 +307,25 @@
             <!-- Sidebar Starts -->
             <div class="sidebar col-xs-12 col-md-4">
               <!-- Categories Widget Starts -->
-              <div class="widget">
-                <h3 class="widget-title">التصنيفات</h3>
-                <ul class="unstyled nav nav-tabs">
-                  <li><a href="#">جافاسكريبت</a></li>
-                  <li><a href="#">ووردبرس</a></li>
-                  <li><a href="#">فوتوشوب</a></li>
-                  <li><a href="#">جملة</a></li>
-                  <li><a href="#">برستاشوب</a></li>
-                  <li><a href="#">الستراتور</a></li>
-                </ul>
-              </div>
+             <div class="widget">
+  <h3 class="widget-title">التصنيفات</h3>
+  <ul class="unstyled nav nav-tabs">
+    <!-- رابط يُرجع كل التدوينات -->
+    <li class="{% if not current_service %}active{% endif %}">
+      <a href="{% url 'furniture:post_list' %}">الكل / عام</a>
+    </li>
+
+    <!-- تكرار على الخدمات الفعليه -->
+    {% for srv in services %}
+      <li class="{% if current_service and srv.id == current_service.id %}active{% endif %}">
+        <a href="{% url 'furniture:service_posts' srv.slug %}">
+          {{ srv.name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
               <!-- Categories Widget Ends -->
               <!-- Archives Widget Starts -->
               <div class="widget">

@@ -1,7 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.utils.text import slugify
+
+
 class User(AbstractUser):
     ROLE_CHOICES = (
         ('member', 'Member'),
@@ -30,6 +31,25 @@ class User(AbstractUser):
         return self.role == 'admin' or self.is_superuser
 
 
+class Service(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to='services/',null=True,blank=True)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name, allow_unicode=True)
+            slug = base_slug
+            count = 1
+            while Service.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{count}"
+                count += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
+    def __str__(self):
+        return self.name
+
 
 # بوستات يكتبها staff/admin
 class Post(models.Model):
@@ -40,6 +60,13 @@ class Post(models.Model):
     content_ar = models.TextField()
     content_en = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    service = models.ForeignKey(
+        Service,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text="اختر خدمة مرتبطة بالمقال، أو اتركه فارغ ليكون المقال عام"
+    )
 
     class Meta:
         ordering = ['-created_at']
@@ -52,3 +79,6 @@ class Comment(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+

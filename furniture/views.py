@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.core.paginator import Paginator
 # Create your views here.
@@ -6,7 +7,9 @@ from django.core.paginator import Paginator
 def landing_page(request):
     context = {
         'message': 'This is dynamic data from Django!',
-        'items': ['Apple', 'Banana', 'Cherry']
+        'items': ['Apple', 'Banana', 'Cherry'],
+        'login_form': AuthenticationForm(),
+        'is_frontend_user' : request.session.get('from_frontend', False)
     }
     return render(request, 'furniture/index.html', context)
 
@@ -14,8 +17,8 @@ def landing_page(request):
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Post
-from .forms import PostForm, CommentForm
+from .models import Post, Service
+from .forms import PostForm, CommentForm, RegisterForm
 
 # صلاحية النشر
 staff_admin = user_passes_test(lambda u: u.is_authenticated and u.role in ['staff', 'admin'])
@@ -47,38 +50,54 @@ def post_detail(request, pk):
 
 # إضافة تقييم شركة
 
-def register_view(request):
+def frontend_signup(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
+            request.session['from_frontend'] = True
             return redirect('/')
     else:
         form = RegisterForm()
-    return render(request, 'core/register.html', {'form': form})
+    return render(request, 'furniture/signup.html', {'form': form})
 
 
-def login_view(request):
+from django.contrib.auth import login as auth_login, authenticate, logout, login
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import AuthenticationForm
+
+
+def frontend_login(request):
     if request.method == 'POST':
-        form = LoginForm(data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
+            login(request, form.get_user())
+            request.session['from_frontend'] = True
             return redirect('/')
     else:
-        form = LoginForm()
-    return render(request, 'core/login.html', {'form': form})
+        form = AuthenticationForm()
+    return render(request, 'furniture/login.html', {'form': form})
 
 
-def logout_view(request):
+
+
+def frontend_logout(request):
     logout(request)
+    request.session.flush()
     return redirect('/')
 
 
-def post_list(request):
+def post_list(request, service_slug=None):       # ← لقبول مسار اختياري
     posts = Post.objects.all().order_by('-created_at')
 
+    # فلتر بالـ service إن وُجد
+    service_obj = None
+    if service_slug:
+        service_obj = get_object_or_404(Service, slug=service_slug)
+        posts = posts.filter(service=service_obj)
+
+    # التعامل مع التعليقات (كما هو)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -88,7 +107,7 @@ def post_list(request):
             comment.post = post
             comment.user = request.user
             comment.save()
-            return redirect('post_list')
+            return redirect(request.path)               # يعيد للفلتر نفسه
     else:
         form = CommentForm()
 
@@ -96,4 +115,11 @@ def post_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'furniture/post_list.html', {'page_obj': page_obj, 'form': form})
+    context = {
+        'page_obj': page_obj,
+        'form': form,
+        'is_frontend_user': request.session.get('from_frontend', False),
+        'services': Service.objects.all(),              # ← جميع الخدمات للودجت
+        'current_service': service_obj,                 # ← المُختارة (إن وُجدت)
+    }
+    return render(request, 'furniture/post_list.html', context)

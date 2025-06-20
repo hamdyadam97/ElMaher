@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+ <meta charset="UTF-8" />
+    <title>شركة الاوئل</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700,900&amp;subset=arabic"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="http://via.placeholder.com/30x30" />
+
+    <!-- Template CSS Files -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/login.css' %}"
+    />
+
+</head>
+<body>
+
+
+
+    <section class="container">
+        <div class="login-container">
+            <div class="circle circle-one"></div>
+            <div class="form-container">
+                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+                <h1 class="opacity"> تسجيل دخول</h1>
+                <form method="post">
+                      {% csrf_token %}
+                      {{ form.as_p }}
+
+                    <button class="opacity">دخول</button>
+                </form>
+                <div class="register-forget opacity">
+                  <a href="{% url 'furniture:signup' %}">سجل الآن</a>
+                    <a href="">FORGOT PASSWORD</a>
+                </div>
+            </div>
+            <div class="circle circle-two"></div>
+        </div>
+        <div class="theme-btn-container"></div>
+    </section>
+  <script type="text/javascript" src="{% static 'js/login.js'%}"></script>
+</body>
+</html>

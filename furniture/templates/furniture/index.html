@@ -177,14 +177,11 @@
                   >
                 </li>
                 <li>
-                  <a
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
-                    class="link-menu"
-                    href="#blog"
-                    ><i class="fa fa-comments"></i> المدونة</a
-                  >
+                  <a class="link-menu" href="{% url 'furniture:post_list' %}">
+                    <i class="fa fa-comments"></i> المدونة
+                  </a>
                 </li>
+
                 <li>
                   <a
                     data-toggle="collapse"
@@ -273,11 +270,13 @@
         </a>
       </div>
       <a href="tel:+966565228413" class="call-button" title="اتصل بنا">
-  <!-- أيقونة الهاتف (SVG) -->
-  <svg viewBox="0 0 24 24">
-    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24 11.36 11.36 0 003.58.57 1 1 0 011 1v3.61a1 1 0 01-1 1A16 16 0 013 5a1 1 0 011-1h3.61a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.24 1.05z"/>
-  </svg>
-</a>
+        <!-- أيقونة الهاتف (SVG) -->
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24 11.36 11.36 0 003.58.57 1 1 0 011 1v3.61a1 1 0 01-1 1A16 16 0 013 5a1 1 0 011-1h3.61a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.24 1.05z"
+          />
+        </svg>
+      </a>
       <!-- Main Slider Section Starts -->
       <section class="mainslider" id="mainslider">
         <!-- Slider Hero Starts -->
@@ -1959,12 +1958,10 @@
               <div class="info-map-boxes-item fa fa-clock-o">
                 <h1>أوقات العمل</h1>
                 <p>
-                   
-                   الخميس - السبت : 
-                   08:00 :18:00
-                   <br />
-                   الجمعة : 13:30 - 21:00 
-                  <br />  
+                  الخميس - السبت : 08:00 :18:00
+                  <br />
+                  الجمعة : 13:30 - 21:00
+                  <br />
                   متاح زيارات
                 </p>
               </div>
@@ -2403,6 +2400,13 @@
         google.maps.event.addDomListener(window, "load", init_map);
       })(jQuery);
     </script>
+    <script>
+  document.querySelectorAll('.nav-menu-inner .link-menu[href^="#"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      document.querySelector('.navbar-collapse').classList.remove('show');
+    });
+  });
+</script>
     <!-- Revolution Slider Initialization Ends -->
   </body>
 </html>

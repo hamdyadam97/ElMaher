@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, Review
 from django.utils.translation import gettext_lazy as _
 
 class PostForm(forms.ModelForm):
@@ -42,3 +42,28 @@ class CommentForm(forms.ModelForm):
                 'class': 'form-control'
             }),
         }
+
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['anonymous', 'reason', 'title', 'content', 'rating', 'image']
+        labels = {
+            'anonymous': 'إخفاء اسمي',
+            'reason': 'سبب التقييم',
+            'title': 'عنوان التقييم',
+            'content': 'تفاصيل التقييم',
+            'rating': 'التقييم',
+            'image': 'صورتك (اختياري)'
+        }
+        widgets = {
+            'anonymous': forms.CheckboxInput(),
+            'reason': forms.Select(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'rating': forms.HiddenInput(),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
+
+

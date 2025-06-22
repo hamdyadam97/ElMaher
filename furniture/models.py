@@ -82,3 +82,35 @@ class Comment(models.Model):
 
 
 
+
+REASON_CHOICES = (
+    ('packing', 'تغليف ممتاز'),
+    ('delivery', 'توصيل سريع'),
+    ('price', 'أسعار مناسبة'),
+    ('support', 'خدمة عملاء ممتازة'),
+    ('other', 'أخرى'),
+)
+
+class Review(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    anonymous = models.BooleanField(default=False, help_text="اختر إذا كنت لا تريد عرض اسمك")
+    reason = models.CharField(max_length=20, choices=REASON_CHOICES)
+    title = models.CharField(max_length=255, verbose_name="عنوان التقييم")
+    content = models.TextField(verbose_name="محتوى التقييم")
+    rating = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
+    image = models.ImageField(upload_to='reviewers/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def display_name(self):
+        if self.anonymous or not self.user:
+            return "مستخدم مجهول"
+        return self.user.username
+
+    def __str__(self):
+        return f"{self.title} - {self.rating}/5"
+
+
+

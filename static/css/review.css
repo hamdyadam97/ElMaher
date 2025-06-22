@@ -1,0 +1,50 @@
+body {
+  font-family: 'Cairo', sans-serif;
+  background-color: #f7f7f7;
+}
+
+.review-form {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.card-review {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.rating-stars {
+  color: #f39c12;
+  font-size: 1.2rem;
+}
+
+.review-image {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.star-rating {
+  direction: rtl;
+  font-size: 2rem;
+  unicode-bidi: bidi-override;
+  display: inline-flex;
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  color: #ccc;
+  cursor: pointer;
+  padding: 0 5px;
+  transition: color 0.2s;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type="radio"]:checked ~ label {
+  color: #f39c12;
+}

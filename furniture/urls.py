@@ -12,4 +12,6 @@ urlpatterns = [
     path('login/', views.frontend_login, name='login'),
     path('logout/', views.frontend_logout, name='logout'),
     path('posts/service/<str:service_slug>/', views.post_list, name='service_posts'),
+    path('reviews/crud/', views.review_crud_page, name='review_crud_page'),
+    path('reviews/<int:pk>/', views.review_detail, name='review_detail'),
 ]

@@ -17,8 +17,8 @@ def landing_page(request):
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Post, Service
-from .forms import PostForm, CommentForm, RegisterForm
+from .models import Post, Service, Review
+from .forms import PostForm, CommentForm, RegisterForm, ReviewForm
 
 # صلاحية النشر
 staff_admin = user_passes_test(lambda u: u.is_authenticated and u.role in ['staff', 'admin'])
@@ -46,7 +46,7 @@ def post_detail(request, pk):
             comment.user = request.user
         comment.save()
         return redirect('post_detail', pk=pk)
-    return render(request, 'core/post_detail.html', {'post': post, 'form': form})
+    return render(request, 'furniture/post_detail.html', {'post': post, 'form': form})
 
 # إضافة تقييم شركة
 
@@ -123,3 +123,64 @@ def post_list(request, service_slug=None):       # ← لقبول مسار اخ�
         'current_service': service_obj,                 # ← المُختارة (إن وُجدت)
     }
     return render(request, 'furniture/post_list.html', context)
+
+
+
+
+def review_crud_page(request):
+    reviews = Review.objects.all().order_by('-created_at')
+    edit_review = None
+    form = ReviewForm()
+
+    # تعديل تقييم
+    if request.user.is_authenticated and 'edit_id' in request.GET:
+        edit_review = get_object_or_404(Review, pk=request.GET.get('edit_id'))
+        if edit_review.user != request.user and not request.user.is_superuser:
+            return redirect('furniture:review_crud_page')
+        form = ReviewForm(instance=edit_review)
+
+    # إضافة أو تعديل
+    if request.method == 'POST':
+        if 'edit_id' in request.POST:
+            if not request.user.is_authenticated:
+                return redirect('furniture:review_crud_page')  # مش مسموح تعديل بدون دخول
+            edit_review = get_object_or_404(Review, pk=request.POST.get('edit_id'))
+            if edit_review.user != request.user and not request.user.is_superuser:
+                return redirect('furniture:review_crud_page')
+            form = ReviewForm(request.POST, request.FILES, instance=edit_review)
+        else:
+            form = ReviewForm(request.POST, request.FILES)
+            print(form,'ssssssssssss')
+            print(form.is_valid(),'ssssssssssss')
+        if form.is_valid():
+            review = form.save(commit=False)
+            if request.user.is_authenticated:
+                review.user = request.user
+            review.save()
+            return redirect('furniture:review_crud_page')
+
+    # حذف تقييم
+    if request.user.is_authenticated and 'delete_id' in request.GET:
+        review = get_object_or_404(Review, pk=request.GET.get('delete_id'))
+        if review.user == request.user or request.user.is_superuser:
+            review.delete()
+            return redirect('furniture:review_crud_page')
+
+    return render(request, 'furniture/review.html', {
+        'reviews': reviews,
+        'form': form,
+        'edit_review': edit_review,
+    })
+
+
+
+
+
+
+
+
+
+
+def review_detail(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+    return render(request, 'furniture/review_detail.html', {'review': review})

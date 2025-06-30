@@ -1,0 +1,71 @@
+{% load static %}
+{% load i18n %}
+<section id="about" class="about">
+        <!-- Container Starts -->
+        <div class="container">
+          <!-- Main Heading Starts -->
+          <div class="text-center top-text">
+            <h1><span> {% trans "Company" %} </span>  {% trans "Al-Owael" %}</h1>
+            <h4> {% trans "Why Us" %}</h4>
+          </div>
+          <!-- Main Heading Ends -->
+          <!-- Divider Starts -->
+          <div class="divider text-center">
+            <span class="outer-line"></span>
+            <span class="fa fa-user" aria-hidden="true"></span>
+            <span class="outer-line"></span>
+          </div>
+          <!-- Divider Ends -->
+          <!-- About Content Starts -->
+          <div class="row about-content">
+            <div class="col-sm-12 col-md-12 col-lg-6 about-left-side">
+              <h3 class="title-about"> {%trans  "We are" %}  <strong> {%  trans "Al-Owael Company"%}</strong></h3>
+              <hr />
+              <p>
+                {{ about.why_us }}
+              </p>
+              <!-- Tabs Heading Starts -->
+              <ul class="nav nav-tabs">
+                <li>
+                  <a class="active" data-toggle="tab" href="#menu1"> {% trans "Our History" %}</a>
+                </li>
+                <li><a data-toggle="tab" href="#menu2"> {% trans "Our Services" %}</a></li>
+                <li><a data-toggle="tab" href="#menu3"> {% trans "Why Us" %}</a></li>
+              </ul>
+              <!-- Tabs Heading Ends -->
+              <!-- Tabs Content Starts -->
+              <div class="tab-content">
+                <div id="menu1" class="tab-pane fade in active">
+                  <p>
+                   {{ about.history }}
+                  </p>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                  <p>
+                     {{ about.services }}
+                  </p>
+                </div>
+                <div id="menu3" class="tab-pane fade">
+                  <p>
+                   {{ about.about_us }}
+                  </p>
+                </div>
+              </div>
+              <a class="custom-button scroll-to-target" href="#portfolio"
+                >{% trans "Our Work" %} </a
+              >
+            </div>
+            <div class="col-md-12 col-lg-6 about-right">
+              <div class="about-right-side">
+                <img
+                  class="img-fluid"
+                  src="{{about.image.url}}"
+                 alt="{% trans 'Team Member Image' %}"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- About Content Ends -->
+        </div>
+        <!-- Container Ends -->
+      </section>

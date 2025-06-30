@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-25 23:20+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Sign Up"
+msgstr "Sign Up"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "About Us"
+msgstr "About Us"
+
+msgid "Services"
+msgstr "Services"
+
+msgid "Portfolio"
+msgstr "Portfolio"
+
+msgid "Our Team"
+msgstr "Our Team"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Contact Us"
+msgstr "Contact Us"
+
+msgid "Welcome"
+msgstr "Welcome"
+
+msgid "Logout"
+msgstr "Logout"
+
+msgid "Al-Awael Company"
+msgstr "Al-Awael Company"
+
+
+msgid  "One of the best and most beautiful furniture shipping companies"
+msgstr "One of the best and most beautiful furniture shipping companies"
+
+msgid "Read more about us"
+msgstr "Read more about us"
+
+
+
+msgid "Our History"
+msgstr "Our History"
+
+msgid "Our Services"
+msgstr "Our Services"
+
+msgid "Why Us"
+msgstr "Why Us"
+
+msgid "Our Work"
+msgstr "Our Work"
+
+msgid "Company"
+msgstr "Company"
+
+msgid "Al-Owael"
+msgstr "Al-Owael"
+
+msgid "We are"
+msgstr "We are"
+
+msgid "Al-Owael Company"
+msgstr "Al-Owael Company"
+
+msgid "Company Image"
+msgstr "Company Image"
+
+msgid "Team Member Image"
+msgstr "Team Member Image"
+
+msgid "All rights reserved - This website was designed by"
+msgstr "All rights reserved - This website was designed by"

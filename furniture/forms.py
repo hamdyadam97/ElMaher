@@ -12,17 +12,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
 
-class RegisterForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']  # remove 'role'
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.role = 'member'  # always assign 'member' role on form submission
-        if commit:
-            user.save()
-        return user
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label=_('اسم المستخدم / Username'))

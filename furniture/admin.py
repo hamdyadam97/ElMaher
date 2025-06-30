@@ -2,9 +2,9 @@ from django.contrib import admin
 
 
 # Register your models here.
-from .models import User, Post, Comment, Service, Review
+from .models import  Post, Comment, Service, Review
 
-admin.site.register(User)
+
 admin.site.register(Post)
 admin.site.register(Comment)
 admin.site.register(Service)

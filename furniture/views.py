@@ -1,24 +1,29 @@
-from django.http import JsonResponse
-from django.shortcuts import render
+
 from django.core.paginator import Paginator
 # Create your views here.
+from django.utils import translation
+
+from user.forms import RegisterForm
 
 
 def landing_page(request):
+    form = RegisterForm()
+    print(translation.get_language(),'sssssssssssssssssssssssssss')
     context = {
         'message': 'This is dynamic data from Django!',
         'items': ['Apple', 'Banana', 'Cherry'],
         'login_form': AuthenticationForm(),
-        'is_frontend_user' : request.session.get('from_frontend', False)
+        'is_frontend_user' : request.session.get('from_frontend', False),
+        'form' : form
     }
-    return render(request, 'furniture/index.html', context)
+    return render(request, 'furniture/home.html', context)
 
 
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Post, Service, Review
-from .forms import PostForm, CommentForm, RegisterForm, ReviewForm
+from .forms import PostForm, CommentForm, ReviewForm
 
 # صلاحية النشر
 staff_admin = user_passes_test(lambda u: u.is_authenticated and u.role in ['staff', 'admin'])
@@ -48,19 +53,6 @@ def post_detail(request, pk):
         return redirect('post_detail', pk=pk)
     return render(request, 'furniture/post_detail.html', {'post': post, 'form': form})
 
-# إضافة تقييم شركة
-
-def frontend_signup(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            request.session['from_frontend'] = True
-            return redirect('/')
-    else:
-        form = RegisterForm()
-    return render(request, 'furniture/signup.html', {'form': form})
 
 
 from django.contrib.auth import login as auth_login, authenticate, logout, login
@@ -171,13 +163,6 @@ def review_crud_page(request):
         'form': form,
         'edit_review': edit_review,
     })
-
-
-
-
-
-
-
 
 
 

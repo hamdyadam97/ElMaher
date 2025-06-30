@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ {% include 'mainslider.html' %}
+  {% include 'section/about-us.html'  with about=about lang=lang %}
+{% endblock %}

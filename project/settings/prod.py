@@ -30,10 +30,8 @@ X_FRAME_OPTIONS = "DENY"
 
 
 CSRF_TRUSTED_ORIGINS = [
-     'https://awael-sa.com/',
-     'https://www.awael-sa.com/' 
-     'https://awael-sa.com',
-     'https://www.awael-sa.com'
+    'https://awael-sa.com',
+    'https://www.awael-sa.com',
 ]
 
 ADMINS = [

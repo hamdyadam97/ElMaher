@@ -3,5 +3,4 @@ from . import views
 app_name = 'user'
 urlpatterns = [
     path('signup/', views.frontend_signup, name='signup'),
-
 ]

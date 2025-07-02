@@ -96,3 +96,7 @@ msgstr "Team Member Image"
 
 msgid "All rights reserved - This website was designed by"
 msgstr "All rights reserved - This website was designed by"
+
+
+msgid "Role"
+msgstr "Role"

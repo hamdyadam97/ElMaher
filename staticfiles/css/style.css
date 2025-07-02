@@ -3960,3 +3960,11 @@ body.skew .portfolio .container  {
     fill: white;
   }
 
+.language-select {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    margin: 0;
+}

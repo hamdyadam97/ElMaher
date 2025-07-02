@@ -1,0 +1,68 @@
+   {% load static %}
+{% load i18n %}
+    <section class="projectmanager" id="projectmanager">
+        <!-- Section Overlay Starts -->
+        <div class="section-overlay">
+          <!-- Container Starts -->
+          <div class="container">
+            <div class="row">
+              <!-- Image Starts -->
+              <div class="col-md-12 col-lg-12 col-xl-6">
+                <img
+                  class="img-fluid projectmanagerpicture"
+                  src="{{manager.profile_picture.url}}"
+
+                  alt="{% trans 'project Manager Image' %}"
+                />
+              </div>
+              <!-- Image Ends -->
+              <!-- Details Starts -->
+              <div class="col-md-12 col-lg-12 col-xl-6">
+                <h1> {% trans "Manager" %}</h1>
+                <h3> {{manager.full_name}}</h3>
+              <p>
+                {{ manager.description|slice:":400" }}
+               </p>
+                <blockquote>
+                  {{ manager.description|slice:"400:" }}
+                </blockquote>
+                <!-- Social Media Starts -->
+                <div class="social-icons">
+                  <ul class="social">
+                        {% if manager.twitter %}
+                    <li>
+                      <a class="twitter" href="{{ manager.twitter }}" title="twitter" target="_blank"></a>
+
+                    </li>
+                      {% endif %}
+  {% if manager.facebook %}
+                    <li>
+                      <a class="facebook"  href="{{ manager.facebook }}" title="facebook" target="_blank"></a>
+                    </li>
+                        {% endif %}
+  {% if manager.google %}
+
+                    <li>
+                      <a class="google" href="{{ manager.google }}" title="google" target="_blank"></a>
+                    </li>
+                       {% endif %}
+  {% if manager.instagram %}
+                    <li>
+                      <a class="instagram" href="{{ manager.instagram }}" title="instagram" target="_blank"></a>
+                    </li>
+                        {% endif %}
+  {% if manager.linkedin %}
+                    <li>
+                      <a class="linkedin" href="{{ manager.linkedin }}" title="linkedin" target="_blank"></a>
+                    </li>
+{% endif %}
+                  </ul>
+                </div>
+                <!-- Social Media Ends -->
+              </div>
+            </div>
+            <!-- Details Ends -->
+          </div>
+          <!-- Container Ends -->
+        </div>
+      </section>

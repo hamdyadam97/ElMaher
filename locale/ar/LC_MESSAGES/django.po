@@ -98,4 +98,91 @@ msgstr "صورة الفريق"
 msgid "All rights reserved - This website was designed by"
 msgstr "جميع الحقوق محفوظة - صمّم هذا الموقع من طرف"
 
+msgid "Role"
+msgstr "دور"
+
+
+msgid "Manager"
+msgstr "مدير"
+
+msgid "Accountant"
+msgstr "محاسب"
+
+msgid "Driver"
+msgstr "سائق"
+
+msgid "Packager"
+msgstr "عامل تغليف"
+
+msgid "Technician"
+msgstr "فني"
+
+msgid "Craftsman"
+msgstr "حرفي"
+
+
+msgid "User"
+msgstr "المستخدم"
+
+msgid "Full Name"
+msgstr "الاسم الكامل"
+
+msgid "Job Title"
+msgstr "المسمى الوظيفي"
+
+msgid "Description in English"
+msgstr "الوصف فى اللغة الانجليزية"
+
+msgid "Description in ِArabic"
+msgstr "الوصف فى اللغة العربية"
+
+msgid "project Manager Image"
+msgstr "صورة المدير"
+
+msgid "Phone Number"
+msgstr "رقم الهاتف"
+
+msgid "Profile Picture"
+msgstr "الصورة الشخصية"
+
+msgid "Birth Date"
+msgstr "تاريخ الميلاد"
+
+msgid "Address"
+msgstr "العنوان"
+
+msgid "LinkedIn"
+msgstr "لينكدإن"
+
+msgid "Facebook"
+msgstr "فيسبوك"
+
+msgid "Twitter"
+msgstr "تويتر"
+
+msgid "Instagram"
+msgstr "انستغرام"
+
+msgid "Google"
+msgstr "ميل جوجل"
+
+msgid "Is Active"
+msgstr "نشط"
+
+msgid "Date Joined"
+msgstr "تاريخ الانضمام"
+
+msgid "Created At"
+msgstr "تاريخ الإنشاء"
+
+msgid "Updated At"
+msgstr "تاريخ التحديث"
+
+msgid "A manager already exists in the system."
+msgstr "يوجد بالفعل مدير في النظام."
+
+msgid "Employees"
+msgstr "الموظفين"
+
+
 

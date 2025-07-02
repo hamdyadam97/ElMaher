@@ -723,3 +723,14 @@ body.blog-page article .custom-button:before {
 		border-left:0;
 	}
 }
+
+
+html[dir="rtl"] .language-select {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] .language-select {
+  direction: ltr;
+  text-align: left;
+}

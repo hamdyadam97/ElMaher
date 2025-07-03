@@ -55,29 +55,9 @@ def post_detail(request, pk):
 
 
 
-from django.contrib.auth import login as auth_login, authenticate, logout, login
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
-
-
-def frontend_login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
-            request.session['from_frontend'] = True
-            return redirect('/')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'furniture/login.html', {'form': form})
 
 
 
-
-def frontend_logout(request):
-    logout(request)
-    request.session.flush()
-    return redirect('/')
 
 
 def post_list(request, service_slug=None):       # ← لقبول مسار اختياري

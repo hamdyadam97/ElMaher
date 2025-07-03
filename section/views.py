@@ -1,5 +1,7 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render
 from django.utils import translation
+from user.forms import RegisterForm
 from user.models import Employee
 from .models import AboutUs
 
@@ -7,9 +9,13 @@ from .models import AboutUs
 def home(request):
     about = AboutUs.objects.last()
     manager = Employee.objects.filter(job_title="manager", is_active=True).first()
+    form_signup = RegisterForm()
+    form_signin = AuthenticationForm()
     current_lang = translation.get_language()
     return render(request, 'section/home.html', {
         'about': about,
         'lang': current_lang,
-        'manager':manager
+        'manager': manager,
+        'form_signup': form_signup,
+        'form_signin': form_signin,
     })

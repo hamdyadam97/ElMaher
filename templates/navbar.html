@@ -29,24 +29,18 @@
             <!-- Navigation Menu Starts -->
             <div class="collapse navbar-collapse nav-menu" id="navbarSupportedContent">
                 <ul class="nav-menu-inner mr-auto">
-                    {% if user.is_authenticated and is_frontend_user %}
+                    {% if user.is_authenticated%}
                     <li>
-                        <a class="link-menu" href="{% url 'furniture:logout' %}">
+                        <a class="link-menu" href="{% url 'user:sign_out' %}">
                             <i class="fa fa-sign-out"></i>   {% trans "Logout" %}
                         </a>
                     </li>
                     <li>
-                        <span class="link-menu">
+                        <a class="link-menu">
                             <i class="fa fa-user-circle"></i> {% trans "Welcome" %} {{ user.username }}
-                        </span>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a class="link-menu" href="{% url 'furniture:login' %}">
-                            <i class="fa fa-sign-in"></i>  {% trans "Login" %}
                         </a>
                     </li>
-
+                    {% else %}
                     <li>
                         <a class="btn link-menu" href="#"  data-toggle="modal" data-target="#signupModal">
                             <i class="fa fa-user-plus"></i>   {% trans "Sign Up" %}
@@ -85,7 +79,7 @@
     <label class="link-menu" style="margin-bottom: 0; display: flex; align-items: center; gap: 5px;">
       <i class="fa fa-globe"></i>
       <select name="language" onchange="this.form.submit();" class="language-select" style="background: none; border: none; color: inherit; font: inherit;">
-        <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>العربية</option>
+        <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif  %}> العربية</option>
         <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
       </select>
     </label>
@@ -101,4 +95,3 @@
 </header>
 
 
-{% include 'user/signup.html' %}

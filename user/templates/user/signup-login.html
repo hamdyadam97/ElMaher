@@ -1,0 +1,72 @@
+{% load static %}
+{% load i18n %}
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered d-flex justify-content-center align-items-center"
+        style="min-height: 100vh;">
+        <div class="modal-content login-container p-0" style="background: transparent; border: none;">
+            <div class="cont">
+                <div class="form sign-in">
+                    <h2>{% trans "Welcome" %}</h2>
+                    <form method="post" action="{% url 'user:signin' %} " style="margin-right: 50%">
+                         {% csrf_token %}
+                        <label>
+                            <span>{% trans "username" %}</span>
+                            {{ form_signin.username }}
+                        </label>
+                        <label>
+                            <span>{% trans "Password" %}</span>
+                            {{ form_signin.password }}
+                        </label>
+                        <p class="forgot-pass">{% trans "Forgot password?" %}</p>
+                        <button type="submit" class="submit">{% trans "Sign In" %}</button>
+                    </form>
+                </div>
+                <div class="sub-cont">
+                    <div class="img">
+                        <div class="img__text m--up">
+                            <h3>{% trans "Don't have an account? Please Sign up!" %}</h3>
+                        </div>
+                        <div class="img__text m--in">
+
+                            <h3>{% trans "If you already have an account, just sign in." %}</h3>
+                        </div>
+                        <div class="img__btn">
+                            <span class="m--up">{% trans "Sign Up" %}</span>
+                            <span class="m--in">{% trans "Sign In" %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form sign-up">
+                        <form method="post" action="{% url 'user:signup' %}">
+                            {% csrf_token %}
+                            <h2>{% trans "Create your Account" %}</h2>
+                            <label>
+                                <span>{% trans "Name" %}</span>
+                                {{ form_signup.username }}
+                            </label>
+                            <label>
+                                <span>{% trans "Email" %}</span>
+                                {{ form_signup.email }}
+                            </label>
+                            <label>
+                                <span>{% trans "Password" %}</span>
+                                {{ form_signup.password1 }}
+                            </label>
+                            <label>
+                                <span>{% trans "Confirm Password" %}</span>
+                                {{ form_signup.password2 }}
+                            </label>
+                            <button type="submit" class="submit">{% trans "Sign Up" %}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.querySelector('.img__btn').addEventListener('click', function () {
+                    document.querySelector('.cont').classList.toggle('s--signup');
+                });
+            </script>
+        </div>
+    </div>
+</div>

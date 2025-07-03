@@ -53,6 +53,8 @@
   </div>
 
 
+  {% include 'user/signup-login.html' with lang=lang form_signup=form_signup form_signin=form_signin %}
+
   <script type="text/javascript" src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/plugins/jquery.easing.1.3.js' %}"></script>
   <script type="text/javascript"
@@ -225,8 +227,71 @@
   </script>
   <!-- Revolution Slider Initialization Ends -->
 
-  <!-- Revolution Slider Initialization Ends -->
-  <!-- Login Modal -->
+<script>
+  $(document).on("submit", ".form.sign-up form", function (e) {
+    e.preventDefault();
+
+    var form = $(this);
+    var formData = form.serialize();
+    var actionUrl = form.attr("action");
+
+    $.ajax({
+      type: "POST",
+      url: actionUrl,
+      data: formData,
+      success: function (response) {
+        alert("تم التسجيل بنجاح");
+        form[0].reset();
+        $('#signupModal').modal('hide'); // لو عايز تقفل المودال
+      },
+      error: function (xhr) {
+        let errors = xhr.responseJSON?.errors;
+        if (errors) {
+          let errorHtml = "";
+          for (let field in errors) {
+            errorHtml += `<p style="color:red;"><b>${field}:</b> ${errors[field][0]}</p>`;
+          }
+          $(".form.sign-up form").prepend(errorHtml);
+        } else {
+          alert("حدث خطأ أثناء التسجيل");
+        }
+      }
+    });
+  });
+</script>
+<script>
+  $(document).on("submit", ".form.sign-in form", function (e) {
+    e.preventDefault();
+
+    var form_signin = $(this);
+    var formData_signin = form_signin.serialize();
+    var actionUrl_signin = form_signin.attr("action");
+
+    $.ajax({
+      type: "POST",
+      url: actionUrl_signin,
+      data: formData_signin,
+      success: function (response) {
+        alert("تم التسجيل بنجاح");
+        form[0].reset();
+        $('#signupModal').modal('hide'); // لو عايز تقفل المودال
+      },
+      error: function (xhr) {
+        let errors = xhr.responseJSON?.errors;
+        if (errors) {
+          let errorHtml = "";
+          for (let field in errors) {
+            errorHtml += `<p style="color:red;"><b>${field}:</b> ${errors[field][0]}</p>`;
+          }
+          $(".form.sign-in form").prepend(errorHtml);
+        } else {
+          alert("حدث خطأ أثناء التسجيل");
+        }
+      }
+    });
+  });
+</script>
+
 </body>
 
 </html>

@@ -5,12 +5,6 @@ from django.core.exceptions import ValidationError
 
 
 class User(AbstractUser):
-    ROLE_CHOICES = (
-        ('member', _('Member')),
-        ('staff', _('Staff')),
-        ('admin', _('Admin')),
-    )
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='member',verbose_name=_("Role"))
 
     groups = models.ManyToManyField(
         Group,

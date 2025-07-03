@@ -1,25 +1,46 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
 from .forms import RegisterForm
 
 
-
-
-
-# إضافة تقييم شركة
-
-def frontend_signup(request):
+def signup(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
+        form_signup = RegisterForm(request.POST)
+        if form_signup.is_valid():
+            print("FORM IS VALID")  # ✅ هل دي بتظهر؟
+            user = form_signup.save()
             login(request, user)
-            request.session['from_frontend'] = True
-            return redirect('/')
+            return JsonResponse({"status": "success"})
+        else:
+            print("FORM IS NOT VALID:", form_signup.errors)
+            return JsonResponse({"errors": form_signup.errors}, status=400)
     else:
-        form = RegisterForm()
-    return render(request, 'user/signup.html', {'form': form})
+        form_signup = RegisterForm()
+    return render(request, 'user/signup-login.html', {'form_signup': form_signup})
+
+
+def signin(request):
+    if request.method == 'POST':
+        form_signin = AuthenticationForm(request, data=request.POST)
+        if form_signin.is_valid():
+            print('form is valid ')
+            login(request, form_signin.get_user())
+            return JsonResponse({"status": "success"})
+        else:
+            print("FORM IS NOT VALID:", form_signin.errors)
+            return JsonResponse({"errors": form_signin.errors}, status=400)
+    else:
+        form_signin = AuthenticationForm()
+    return render(request, 'user/signup-login.html', {'form_signin': form_signin})
+
+
+def sign_out(request):
+    logout(request)
+    request.session.flush()
+    return redirect('/')
+
+
 
 

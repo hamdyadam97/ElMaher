@@ -23,9 +23,6 @@ msgstr ""
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-msgid "Sign Up"
-msgstr "إنشاء حساب"
-
 msgid "Home"
 msgstr "الرئيسية"
 
@@ -183,6 +180,37 @@ msgstr "يوجد بالفعل مدير في النظام."
 
 msgid "Employees"
 msgstr "الموظفين"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Forgot password?"
+msgstr "هل نسيت كلمة المرور؟"
+
+msgid "Sign In"
+msgstr "تسجيل الدخول"
+
+msgid "Don't have an account? Please Sign up!"
+msgstr "ليس لديك حساب؟ سجّل الآن!"
+
+msgid "If you already have an account, just sign in."
+msgstr "إذا كان لديك حساب بالفعل، فقط سجّل الدخول."
+
+msgid "Sign Up"
+msgstr "إنشاء حساب"
+
+msgid "Create your Account"
+msgstr "أنشئ حسابك"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Confirm Password"
+msgstr "تأكيد كلمة المرور"
+
 
 
 

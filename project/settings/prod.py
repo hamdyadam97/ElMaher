@@ -29,11 +29,6 @@ CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = "DENY"
 
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://awael-sa.com',
-    'https://www.awael-sa.com',
-]
-
 ADMINS = [
     ('Hamdy', 'hamdyadam543@gmail.com'),
 ]

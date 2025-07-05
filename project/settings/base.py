@@ -15,8 +15,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
-
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
+#
+# ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -43,7 +43,7 @@ MIDDLEWARE = [
 ]
 
 
-ROOT_URLCONF = 'project.urls'
+# ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {

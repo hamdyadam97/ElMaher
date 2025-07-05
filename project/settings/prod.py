@@ -2,7 +2,7 @@
 # project/settings/production.py
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
 DATABASES = {
     "default": {

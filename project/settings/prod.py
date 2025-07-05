@@ -30,7 +30,7 @@ X_FRAME_OPTIONS = "DENY"
 
 
 ADMINS = [
-    ('Hamdy', 'hamdyadam543@gmail.com'),
+    ('Hamdy', 'muhammadsaad199719@gmail.com'),
 ]
 
 LOGGING = {

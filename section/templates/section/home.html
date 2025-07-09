@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
- {% include 'mainslider.html' %}
-  {% include 'section/about-us.html'  with about=about lang=lang %}
+{% include 'mainslider.html' %}
+{% include 'section/about-us.html'  with about=about lang=lang %}
 {% include 'section/manager.html' with manager=manager lang=lang %}
+{% include 'section/service.html' with services=services lang=lang %}
+{% include 'section/portfolio.html' with works=works lang=lang %}
+{% include 'section/map.html' with works=works lang=lang %}
+{% include 'user/team.html' with employees=employees lang=lang %}
 {% endblock %}

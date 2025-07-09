@@ -1,0 +1,62 @@
+{% load static %}
+{% load i18n %}
+
+    <section id="team" class="team">
+        <!-- Container Starts -->
+        <div class="container">
+          <!-- Main Heading Starts -->
+          <div class="text-center top-text">
+            <h1><span>{% trans 'Members' %}</span> {% trans 'Team' %}</h1>
+            <h4>{% trans 'Get to know us more' %}</h4>
+          </div>
+          <!-- Main Heading Ends -->
+          <!-- Divider Starts -->
+          <div class="divider text-center">
+            <span class="outer-line"></span>
+            <span class="fa fa-users" aria-hidden="true"></span>
+            <span class="outer-line"></span>
+          </div>
+          <!-- Divider Ends -->
+          <!-- Team Members Starts -->
+          <div class="row team-members magnific-popup-gallery">
+          {% for employee in employees %}
+            <div class="col-lg-3 col-md-6 col-sm-12">
+              <div class="team-member">
+                <!-- Team Member Picture Starts -->
+                <a
+                  title="{{employee.full_name}}"
+                  href="#"
+                  data-gal="magnific-pop-up[team]"
+                  class="team-member-img-wrap"
+                  >
+                  {% if employee.profile_picture.url %}
+                  <img src="{{employee.profile_picture.url}}" alt="team member"/></a>
+                {% else %}
+                  <img src="{% static 'img/blog/anonymous_user.jpg'%}" alt="team member"/></a>
+                {% endif %}
+                <!-- Team Member Picture Ends -->
+                <!-- Team Member Details Starts -->
+                <div class="team-member-caption social-icons">
+                  <h4> {{employee.full_name}}</h4>
+                  <p>  {{employee.job_title}}</p>
+                  <ul class="list list-inline social">
+                    <li>
+                      <a href="#{{employee.facebook}}" class="fa fa-facebook"></a>
+                    </li>
+                    <li>
+                      <a href="#{{employee.twitter}}" class="fa fa-twitter"></a>
+                    </li>
+                    <li>
+                      <a href="{{employee.goolge}}" class="fa fa-google-plus"></a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- Team Member Details Starts -->
+              </div>
+            </div>
+           {% endfor %}
+          </div>
+          <!-- Team Members Ends -->
+        </div>
+        <!-- Container Ends -->
+      </section>

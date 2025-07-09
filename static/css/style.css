@@ -3968,3 +3968,26 @@ body.skew .portfolio .container  {
     padding: 0;
     margin: 0;
 }
+
+/* تحكم في حجم الفيديو */
+.mfp-content video {
+  max-width: 700px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* تمركز الـ popup */
+.mfp-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* يتمدد لطول الشاشة */
+}
+
+.post-meta span {
+    display: inline-block;
+    margin-right: 15px;
+  }

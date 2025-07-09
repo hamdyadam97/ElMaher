@@ -1,0 +1,243 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+		<!-- Banner Starts -->
+		<section class="banner banner-blog-post">
+			<div class="content text-center">
+				<div class="text-center top-text">
+					<!-- Main Heading Starts -->
+					<div class="text-center top-text">
+						<h1> {{ post.title }}</h1>
+					</div>
+					<!-- Main Heading Ends -->
+					<hr>
+					<!-- Meta Starts -->
+
+						<div class="post-meta">
+  <span>
+    <i class="fa fa-calendar">{{ post.created_at|date:"d/m/Y" }}</i>
+  </span>
+
+  <span>
+    <i class="fa fa-commenting"> {% if post.comments.all|length > 0 %}
+      <span>{{ post.comments.all|length }}</span>
+    {% else %}
+      <span>{% trans 'No Comments yet' %}  </span>
+    {% endif %}</i>
+
+  </span>
+</div>
+
+
+
+					</div>
+
+				</div>
+			</div>
+		</section>
+		<!-- Banner Ends -->
+		<!-- Section Content Starts -->
+		<section class="blog">
+			<div class="container">
+				<div class="row">
+					<div class="content col-xs-12 col-md-8">
+						<!-- Article Starts -->
+						<article>
+
+                <img class="img-responsive col-12" src="{{post.image.url}}"  alt=""  />
+
+
+
+              <h1>{{ post.title }}</h1>
+
+							<p class="content-article">{{ post.content_ar }}</p>
+
+							<div class="post-meta">
+  <span>
+    <i class="fa fa-calendar">{{ post.created_at|date:"d/m/Y" }}</i>
+  </span>
+
+  <span>
+    <i class="fa fa-commenting"> {% if post.comments.all|length > 0 %}
+      <span>{{ post.comments.all|length }}</span>
+    {% else %}
+      <span>{% trans 'No Comments yet' %}  </span>
+    {% endif %}</i>
+
+  </span>
+</div>
+
+							<h3 class="comments-heading add-comment"> {% trans 'Add Comment' %}  </h3>
+								<!-- Comments Form Starts -->
+								<div class="custom-form comments-form">
+
+              <form method="POST" class="mt-2">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="post_slug" value="{{ post.slug }}" />
+                <button type="submit" class="btn btn-sm btn-primary">{% trans 'Submit' %}</button>
+              </form>
+								</div>
+
+							<div class="comments">
+
+								<h3 class="comments-heading uppercase">{% if post.comments.all|length > 0 %}
+									<p>{% trans 'Number of  Comments ' %}   : {{ post.comments.all|length }}</p>
+									{% else %}
+									<p>{% trans 'No Comments yet' %}  </p>
+									{% endif %}
+								</h3>
+								{% for comment in comments %}
+								<ul class="comments-list">
+									<li>
+										<!-- Comment Starts -->
+										<div class="comment">
+											{% if comment.user.image %}
+											<img class="comment-avatar pull-left" alt="" src="{{comment.user.image.url}}">
+											{% else %}
+											<img class="comment-avatar pull-left" alt="" src="{% static 'img/blog/anonymous_user.jpg' %}">
+											{% endif %}
+											<div class="comment-body">
+												<div class="meta-data">
+													{% if comment.user %}
+													<span class="comment-author"> {{ comment.user}}</span>
+													{% else %}
+													<span class="comment-author"> {% trans 'Anonymous User' %}</span>
+													{% endif %}
+													<span class="comment-date pull-right second-font">
+														{{comment.created_at}}</span>
+												</div>
+												<p class="comment-content">
+													{{ comment.text}}
+
+												</p>
+												<div class="reply-form" id="reply-form-{{ comment.id }}" style="display: none;">
+  <form method="POST" action="" class="reply-comment-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="parent" value="{{ comment.id }}">
+    <button type="submit" class="btn btn-sm btn-primary">{% trans 'إرسال الرد' %}</button>
+  </form>
+</div>
+
+												<div>
+												 <a href="#" class="comment-reply" data-parent="{{ comment.id }}">رد</a>
+												</div>
+											</div>
+
+										</div>
+										{% for reply in comment.replies.all %}
+
+											<ul class="comments-reply">
+											<li>
+
+												<div class="comment">
+													{% if reply.user.image %}
+													<img class="comment-avatar pull-left" alt=""
+														 src="{{reply.user.image.url}}">
+													{% else %}
+													<img class="comment-avatar pull-left" alt=""
+														 src="{% static 'img/blog/anonymous_user.jpg' %}">>
+													{% endif  %}
+													<div class="comment-body">
+														<div class="meta-data">
+															<span class="comment-author">{{reply..user}} </span>
+															<span class="comment-date pull-right">{{reply.created_at}}</span>
+														</div>
+														<p class="comment-content">
+															{{reply.text}}
+															</p>
+														<div>
+															<div class="reply-form" id="reply-form-{{ reply.id }}" style="display: none;">
+  <form method="POST" action="" class="reply-comment-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="parent" value="{{ reply.id }}">
+    <button type="submit" class="btn btn-sm btn-primary">{% trans 'Add comment' %}</button>
+  </form>
+</div>
+														 <a href="#" class="comment-reply" data-parent="{{ reply.id }}">رد</a>
+														</div>
+													</div>
+												</div>
+
+											</li>
+										</ul>
+										{% endfor%}
+
+									</li>
+								</ul>
+								{% endfor %}
+						</article>
+
+					</div>
+					<!-- Sidebar Starts -->
+					<div class="sidebar col-xs-12 col-md-4">
+						<!-- Categories Widget Starts -->
+						  <div class="widget">
+            <h3 class="widget-title">{% trans 'Categories' %}</h3>
+            <ul class="unstyled nav nav-tabs">
+              <!-- رابط يُرجع كل التدوينات -->
+              <li class="{% if not current_service %}active{% endif %}">
+                <a href="{% url 'post:post_list' %}"> {% trans 'All / General' %} </a>
+              </li>
+              {% for srv in services %}
+              <li class="{% if current_service and srv.id == current_service.id %}active{% endif %}">
+                  <a href="{% url 'post:post_list' service_slug=srv.slug %}">{{ srv.name }}</a>
+
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+						<!-- Categories Widget Ends -->
+						<!-- Archives Widget Starts -->
+						<div class="widget">
+							<h3 class="widget-title">{% trans 'ِArchives' %}  </h3>
+							    <ul class="unstyled arrow nav nav-tabs">
+              {% for archive in archives %}
+                {% with archive.month|date:"Y" as year %}
+                {% with archive.month|date:"m" as month %}
+                  <li>
+                    <a href="{% url 'post:post_archive' year month %}">
+                      {{ archive.month|date:"F Y" }}
+                      ({{ archive.post_count }})
+                    </a>
+                  </li>
+                      {% endwith %}
+                      {% endwith %}
+                    {% endfor %}
+            </ul>
+						</div>
+
+
+					</div>
+					<!-- Sidebar Ends -->
+				</div>
+			</div>
+		</section>
+		<!-- Section Content Ends -->
+
+<script>
+  document.querySelectorAll(".comment-reply").forEach(btn => {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+
+      // إخفاء كل فورمات الرد المفتوحة
+      document.querySelectorAll(".reply-form").forEach(form => {
+        form.style.display = "none";
+      });
+
+      const parentId = this.getAttribute("data-parent");
+
+      const form = document.getElementById("reply-form-" + parentId);
+      if (form) {
+        form.style.display = "block";
+        form.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+</script>
+
+{% endblock %}

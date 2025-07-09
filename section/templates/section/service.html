@@ -1,0 +1,44 @@
+{% load static %}
+{% load i18n %}
+<section id="services" class="services">
+        <!-- Container Starts -->
+        <div class="container">
+          <!-- Main Heading Starts -->
+          <div class="text-center top-text">
+            <h1><span>   {% trans 'Most important'%} </span> {%trans 'Services'%}</h1>
+            <h4>   {% trans "What we provide to our customers" %}</h4>
+          </div>
+          <!-- Main Heading Starts -->
+          <!-- Divider Starts -->
+          <div class="divider text-center">
+            <span class="outer-line"></span>
+            <span class="fa fa-cogs" aria-hidden="true"></span>
+            <span class="outer-line"></span>
+          </div>
+
+          <div class="row services-box">
+            <!-- Service Item Starts -->
+            {% for service in services %}
+            <div class="col-lg-4 col-md-6 col-sm-12 services-box-item">
+              <!-- Service Item Cover Starts -->
+              <span
+                class="services-box-item-cover fa fa-leaf"
+                data-headline="{{service.name}}"
+              ></span>
+              <!-- Service Item Cover Ends -->
+              <!-- Service Item Content Starts -->
+              <div class="services-box-item-content fa fa-leaf">
+                <h2>  {{service.name}} </h2>
+                <p>
+                 {{service.service}}
+                </p>
+              </div>
+              <!-- Service Item Content Ends -->
+            </div>
+          {% endfor %}
+
+
+          </div>
+          <!-- Services Ends -->
+        </div>
+      </section>

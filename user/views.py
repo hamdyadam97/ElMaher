@@ -9,12 +9,13 @@ def signup(request):
     if request.method == 'POST':
         form_signup = RegisterForm(request.POST)
         if form_signup.is_valid():
-            print("FORM IS VALID")  # ✅ هل دي بتظهر؟
+
             user = form_signup.save()
             login(request, user)
+
             return JsonResponse({"status": "success"})
         else:
-            print("FORM IS NOT VALID:", form_signup.errors)
+
             return JsonResponse({"errors": form_signup.errors}, status=400)
     else:
         form_signup = RegisterForm()
@@ -25,11 +26,10 @@ def signin(request):
     if request.method == 'POST':
         form_signin = AuthenticationForm(request, data=request.POST)
         if form_signin.is_valid():
-            print('form is valid ')
             login(request, form_signin.get_user())
             return JsonResponse({"status": "success"})
         else:
-            print("FORM IS NOT VALID:", form_signin.errors)
+
             return JsonResponse({"errors": form_signin.errors}, status=400)
     else:
         form_signin = AuthenticationForm()

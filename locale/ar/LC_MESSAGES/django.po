@@ -74,13 +74,13 @@ msgid "Our Work"
 msgstr "أعمالنا"
 
 
-msgid " Company"
+msgid "Company"
 msgstr "شركة"
 
 msgid "Al-Owael"
 msgstr "الاوئل"
 
-msgid " We are"
+msgid "We are"
 msgstr "نحن"
 
 msgid "Al-Owael Company"
@@ -212,5 +212,77 @@ msgid "Confirm Password"
 msgstr "تأكيد كلمة المرور"
 
 
+msgid "What we provide to our customers"
+msgstr "ما نقدمه لعملائنا"
+
+
+msgid "Most important"
+msgstr "أهم"
+
+
+msgid "Latest"
+msgstr "اخر"
+
+msgid "Some examples of our achievements"
+msgstr "بعض الأمثلة على إنجازاتنا"
+
+msgid "All Projects"
+msgstr "كل المشاريع"
+
+msgid "Photos"
+msgstr "الصور"
+
+msgid "Videos"
+msgstr "الفيديو"
+
+msgid "Websites"
+msgstr "موقع انترنت"
+
+msgid "Team"
+msgstr " الفريق"
+
+msgid "Members"
+msgstr " اعضاء"
+
+msgid "Get to know us more"
+msgstr "تعرف علينا اكثر "
+
+
+msgid "Article"
+msgstr "المقالات"
+
+msgid "Latest Comment"
+msgstr "اخر التعليقات"
+
+msgid "No Comments yet"
+msgstr "لا توجود تعليقات حتى الان"
+
+msgid "text"
+msgstr "نص"
+
+msgid "Read More"
+msgstr "اقرا اكثر"
+
+msgid "Categories"
+msgstr "التصنيفات"
+
+msgid "All / General"
+msgstr "الكل / عام"
+
+msgid "ِArchives"
+msgstr "الأرشيف"
+
+
+msgid "Add Comment"
+msgstr "ضيف تعليق"
+
+msgid "Submit"
+msgstr "ضيف"
+
+msgid "Write Your Comment Here ..."
+msgstr "اكتب تعليقك هنا"
+
+msgid "Comment"
+msgstr "تعليق"
 
 

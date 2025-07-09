@@ -9,7 +9,7 @@
                 <div class="form sign-in">
                     <h2>{% trans "Welcome" %}</h2>
                     <form method="post" action="{% url 'user:signin' %} " style="margin-right: 50%">
-                         {% csrf_token %}
+                        {% csrf_token %}
                         <label>
                             <span>{% trans "username" %}</span>
                             {{ form_signin.username }}

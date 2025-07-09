@@ -4,31 +4,10 @@
     <div class="header-inner">
         <!-- Navbar Starts -->
         <nav class="navbar navbar-expand-lg p-0">
-            <!-- Logo Starts -->
-            <div class="logo">
-                <a class="navbar-brand link-menu" href="#mainslider">
-                    <!-- Logo White Starts -->
-                    <img id="logo-light" class="logo-light" src="{% static 'img/logo.png'%}" alt="logo-light" />
-                    <!-- Logo White Ends -->
-                    <!-- Logo Black Starts -->
-                    <img id="logo-dark" class="logo-dark" src="{% static 'img/logo.png'%}" alt="logo-dark" />
-                    <!-- Logo Black Ends -->
-                </a>
-            </div>
-            <!-- Logo Ends -->
-            <!-- Hamburger Icon Starts -->
-            <button class="navbar-toggler p-0" type="button">
-                <span id="icon-toggler">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-            </button>
-            <!-- Hamburger Icon Ends -->
-            <!-- Navigation Menu Starts -->
             <div class="collapse navbar-collapse nav-menu" id="navbarSupportedContent">
+                <img id="logo-light" class="logo-light" style="width: 100px" src="{% static 'img/logo.png'%}" alt="logo-light" />
                 <ul class="nav-menu-inner mr-auto">
+
                     {% if user.is_authenticated%}
                     <li>
                         <a class="link-menu" href="{% url 'user:sign_out' %}">
@@ -47,6 +26,7 @@
                         </a>
                     </li>
                     {% endif %}
+
                     <li>
                         <a class="link-menu" href="#mainslider"><i class="fa fa-home"></i>  {% trans "Home" %}</a>
 
@@ -64,7 +44,7 @@
                         <a class="link-menu" href="#team"><i class="fa fa-user"></i>  {% trans "Our Team" %}</a>
                     </li>
                     <li>
-                        <a class="link-menu" href="{% url 'furniture:post_list' %}">
+                        <a class="link-menu" href="{% url 'post:post_list' %}">
                             <i class="fa fa-comments"></i>  {% trans "Blog" %}
                         </a>
                     </li>

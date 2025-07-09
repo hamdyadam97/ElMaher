@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="wrapper">
+  <section class="banner">
+    <div class="content text-center">
+      <div class="text-center top-text">
+        <!-- Main Heading Starts -->
+        <div class="text-center top-text">
+          <h1> {% trans 'Al-Awael Company' %} </h1>
+        </div>
+        <!-- Main Heading Ends -->
+        <hr />
+        <!-- Breadcrumb Starts -->
+        <ul class="breadcrumb">
+          <li><a href="index-kenburns.html"> {% trans 'Home' %}</a></li>
+          <li> {% trans 'Article' %}</li>
+        </ul>
+        <!-- Breadcrumb Ends -->
+      </div>
+    </div>
+  </section>
+  <!-- Banner Ends -->
+  <!-- Section Content Starts -->
+  <section class="blog">
+    <div class="container">
+      <div class="row">
+        <div class="content col-xs-12 col-md-8">
+          <!-- Article Starts -->
+          {% for post in page_obj %}
+
+          <article>
+
+             <figure>
+              <a href="{% url 'post:post_detail' post.pk %}">
+                <img class="img-responsive col-12" src="{{post.image.url}}"  alt=""  />
+              </a>
+            </figure>
+            <a href="{% url 'post:post_detail' post.pk %}">
+              <h4>{{ post.title }}</h4>
+            </a>
+
+
+
+            <!-- Excerpt Starts -->
+            <p class="excerpt-blog">
+              {{ post.content|truncatewords:40 }}
+            </p>
+            <!-- Excerpt Ends -->
+
+            <a class="custom-button" href="{% url 'post:post_detail' post.slug %}">{% trans 'Read More' %}</a>
+            <!-- Meta Starts -->
+            <div class="meta m-3">
+
+              <span><i class="fa fa-calendar"></i>
+                {{post.created_at|date:"d/m/Y"}}</span>
+              <div class="comments bg-light p-2 rounded">
+                <strong> {% trans 'Latest Comment' %}</strong>
+                {% for comment in post.comments.all|dictsortreversed:"created_at"|slice:":3" %}
+                <p>
+                  <strong>
+                    {% if comment.user %}
+                    {{ comment.user.username }}
+                    {% else %}
+                    {% trans 'Anonymous User' %}
+                    {% endif %}
+                  </strong>
+                  {{ comment.text }}<br>
+                  <small class="text-muted">{{ comment.created_at|date:"d/m/Y" }}</small>
+                </p>
+                {% empty %}
+                <p class="text-muted"> {% trans 'No Comments yet' %} </p>
+                {% endfor %}
+
+              </div>
+
+              <form method="POST" class="mt-2">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="post_slug" value="{{ post.slug }}" />
+                <button type="submit" class="btn btn-sm btn-primary">{% trans 'Submit' %}</button>
+              </form>
+            </div>
+          </article>
+          {% endfor %}
+
+          <nav class="col-12 text-center" aria-label="Page navigation">
+            <ul class="pagination">
+              {% if page_obj.has_previous %}
+              <li>
+                <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                  <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+                </a>
+              </li>
+              {% else %}
+              <li class="disabled">
+                <a href="#" aria-label="Previous">
+                  <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+                </a>
+              </li>
+              {% endif %} {% for page_num in page_obj.paginator.page_range%}
+              {% if page_obj.number == page_num %}
+              <li class="active">
+                <a href="?page={{ page_num }}">{{ page_num }}</a>
+              </li>
+              {% else %}
+              <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+              {% endif %} {% endfor %} {% if page_obj.has_next %}
+              <li>
+                <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                  <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+                </a>
+              </li>
+              {% else %}
+              <li class="disabled">
+                <a href="#" aria-label="Next">
+                  <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+        <!-- Sidebar Starts -->
+        <div class="sidebar col-xs-12 col-md-4">
+          <!-- Categories Widget Starts -->
+          <div class="widget">
+            <h3 class="widget-title">{% trans 'Categories' %}</h3>
+            <ul class="unstyled nav nav-tabs">
+              <!-- رابط يُرجع كل التدوينات -->
+              <li class="{% if not current_service %}active{% endif %}">
+                <a href="{% url 'post:post_list' %}"> {% trans 'All / General' %} </a>
+              </li>
+              {% for srv in services %}
+              <li class="{% if current_service and srv.id == current_service.id %}active{% endif %}">
+                  <a href="{% url 'post:post_list' service_slug=srv.slug %}">{{ srv.name }}</a>
+
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <!-- Categories Widget Ends -->
+          <!-- Archives Widget Starts -->
+          <div class="widget">
+            <h3 class="widget-title">{% trans 'ِArchives' %}</h3>
+            <ul class="unstyled arrow nav nav-tabs">
+              {% for archive in archives %}
+                {% with archive.month|date:"Y" as year %}
+                {% with archive.month|date:"m" as month %}
+                  <li>
+                    <a href="{% url 'post:post_archive' year month %}">
+                      {{ archive.month|date:"F Y" }}
+                      ({{ archive.post_count }})
+                    </a>
+                  </li>
+                      {% endwith %}
+                      {% endwith %}
+                    {% endfor %}
+            </ul>
+          </div>
+          <!-- Archives Widget Ends -->
+
+        </div>
+        <!-- Sidebar Ends -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Content Ends -->
+
+</div>
+{% endblock %}

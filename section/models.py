@@ -23,7 +23,6 @@ class AboutUs(models.Model):
 
     @property
     def history(self):
-        print(self.history_ar)
         return self.history_ar if get_language() == 'ar' else self.history_en
 
     @property
